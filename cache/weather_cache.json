@@ -1,0 +1,485 @@
+{
+  "forecast_23.0225_72.5714_48": {
+    "timestamp": "2026-02-05T00:31:53.443490",
+    "data": [
+      {
+        "timestamp": "2026-02-04 21:00:00",
+        "temperature": 22.13,
+        "humidity": 55,
+        "pressure": 1016,
+        "cloud_cover": 0,
+        "wind_speed": 4.82,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 00:00:00",
+        "temperature": 21.66,
+        "humidity": 53,
+        "pressure": 1016,
+        "cloud_cover": 0,
+        "wind_speed": 4.89,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 03:00:00",
+        "temperature": 21.8,
+        "humidity": 42,
+        "pressure": 1018,
+        "cloud_cover": 0,
+        "wind_speed": 6.22,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 06:00:00",
+        "temperature": 28.56,
+        "humidity": 29,
+        "pressure": 1019,
+        "cloud_cover": 0,
+        "wind_speed": 6.5,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 09:00:00",
+        "temperature": 32.18,
+        "humidity": 22,
+        "pressure": 1015,
+        "cloud_cover": 0,
+        "wind_speed": 3.32,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 12:00:00",
+        "temperature": 31.62,
+        "humidity": 22,
+        "pressure": 1014,
+        "cloud_cover": 0,
+        "wind_speed": 2.98,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 15:00:00",
+        "temperature": 26.86,
+        "humidity": 29,
+        "pressure": 1017,
+        "cloud_cover": 0,
+        "wind_speed": 3.07,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 18:00:00",
+        "temperature": 24.22,
+        "humidity": 33,
+        "pressure": 1017,
+        "cloud_cover": 0,
+        "wind_speed": 2.86,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 21:00:00",
+        "temperature": 22.88,
+        "humidity": 34,
+        "pressure": 1016,
+        "cloud_cover": 0,
+        "wind_speed": 3.41,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 00:00:00",
+        "temperature": 21.44,
+        "humidity": 38,
+        "pressure": 1016,
+        "cloud_cover": 0,
+        "wind_speed": 3.94,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 03:00:00",
+        "temperature": 22.17,
+        "humidity": 39,
+        "pressure": 1018,
+        "cloud_cover": 0,
+        "wind_speed": 4.34,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 06:00:00",
+        "temperature": 29.64,
+        "humidity": 25,
+        "pressure": 1019,
+        "cloud_cover": 0,
+        "wind_speed": 4.45,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 09:00:00",
+        "temperature": 32.57,
+        "humidity": 20,
+        "pressure": 1015,
+        "cloud_cover": 0,
+        "wind_speed": 2.51,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 12:00:00",
+        "temperature": 32.05,
+        "humidity": 21,
+        "pressure": 1013,
+        "cloud_cover": 0,
+        "wind_speed": 0.73,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 15:00:00",
+        "temperature": 26.16,
+        "humidity": 28,
+        "pressure": 1016,
+        "cloud_cover": 6,
+        "wind_speed": 3.77,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 18:00:00",
+        "temperature": 23.62,
+        "humidity": 28,
+        "pressure": 1016,
+        "cloud_cover": 4,
+        "wind_speed": 4.08,
+        "description": "clear sky"
+      }
+    ]
+  },
+  "current_23.0225_72.5714": {
+    "timestamp": "2026-02-05T00:31:54.366994",
+    "data": {
+      "temperature": 22.02,
+      "humidity": 60,
+      "pressure": 1016,
+      "cloud_cover": 0,
+      "wind_speed": 5.66,
+      "description": "smoke",
+      "timestamp": "2026-02-05T00:31:54.366702"
+    }
+  },
+  "forecast_57.0_72.5714_48": {
+    "timestamp": "2026-02-05T00:36:00.377290",
+    "data": [
+      {
+        "timestamp": "2026-02-04 21:00:00",
+        "temperature": -13.16,
+        "humidity": 91,
+        "pressure": 1022,
+        "cloud_cover": 100,
+        "wind_speed": 6.24,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-05 00:00:00",
+        "temperature": -11.74,
+        "humidity": 91,
+        "pressure": 1018,
+        "cloud_cover": 100,
+        "wind_speed": 6.07,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-05 03:00:00",
+        "temperature": -8.89,
+        "humidity": 91,
+        "pressure": 1013,
+        "cloud_cover": 100,
+        "wind_speed": 6.13,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-05 06:00:00",
+        "temperature": -6.93,
+        "humidity": 94,
+        "pressure": 1010,
+        "cloud_cover": 100,
+        "wind_speed": 5.65,
+        "description": "light snow"
+      },
+      {
+        "timestamp": "2026-02-05 09:00:00",
+        "temperature": -4.81,
+        "humidity": 96,
+        "pressure": 1009,
+        "cloud_cover": 100,
+        "wind_speed": 3.83,
+        "description": "snow"
+      },
+      {
+        "timestamp": "2026-02-05 12:00:00",
+        "temperature": -7.97,
+        "humidity": 93,
+        "pressure": 1011,
+        "cloud_cover": 100,
+        "wind_speed": 4.76,
+        "description": "light snow"
+      },
+      {
+        "timestamp": "2026-02-05 15:00:00",
+        "temperature": -13.1,
+        "humidity": 86,
+        "pressure": 1012,
+        "cloud_cover": 100,
+        "wind_speed": 3.69,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-05 18:00:00",
+        "temperature": -17.65,
+        "humidity": 93,
+        "pressure": 1014,
+        "cloud_cover": 100,
+        "wind_speed": 2.47,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-05 21:00:00",
+        "temperature": -23.65,
+        "humidity": 98,
+        "pressure": 1015,
+        "cloud_cover": 100,
+        "wind_speed": 1.83,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-06 00:00:00",
+        "temperature": -25.05,
+        "humidity": 98,
+        "pressure": 1015,
+        "cloud_cover": 100,
+        "wind_speed": 1.72,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-06 03:00:00",
+        "temperature": -25.88,
+        "humidity": 98,
+        "pressure": 1014,
+        "cloud_cover": 54,
+        "wind_speed": 2,
+        "description": "broken clouds"
+      },
+      {
+        "timestamp": "2026-02-06 06:00:00",
+        "temperature": -17.06,
+        "humidity": 90,
+        "pressure": 1013,
+        "cloud_cover": 38,
+        "wind_speed": 3.3,
+        "description": "scattered clouds"
+      },
+      {
+        "timestamp": "2026-02-06 09:00:00",
+        "temperature": -13.13,
+        "humidity": 89,
+        "pressure": 1013,
+        "cloud_cover": 68,
+        "wind_speed": 4.07,
+        "description": "broken clouds"
+      },
+      {
+        "timestamp": "2026-02-06 12:00:00",
+        "temperature": -14.8,
+        "humidity": 94,
+        "pressure": 1013,
+        "cloud_cover": 76,
+        "wind_speed": 3.4,
+        "description": "broken clouds"
+      },
+      {
+        "timestamp": "2026-02-06 15:00:00",
+        "temperature": -14.82,
+        "humidity": 94,
+        "pressure": 1016,
+        "cloud_cover": 91,
+        "wind_speed": 3.99,
+        "description": "overcast clouds"
+      },
+      {
+        "timestamp": "2026-02-06 18:00:00",
+        "temperature": -16.23,
+        "humidity": 96,
+        "pressure": 1019,
+        "cloud_cover": 93,
+        "wind_speed": 3.65,
+        "description": "overcast clouds"
+      }
+    ]
+  },
+  "current_57.0_72.5714": {
+    "timestamp": "2026-02-05T00:36:01.218640",
+    "data": {
+      "temperature": -13.39,
+      "humidity": 91,
+      "pressure": 1022,
+      "cloud_cover": 100,
+      "wind_speed": 6.36,
+      "description": "overcast clouds",
+      "timestamp": "2026-02-05T00:36:01.218047"
+    }
+  },
+  "forecast_18.463605257648183_73.83690591140855_48": {
+    "timestamp": "2026-02-05T01:03:54.591685",
+    "data": [
+      {
+        "timestamp": "2026-02-04 21:00:00",
+        "temperature": 23,
+        "humidity": 35,
+        "pressure": 1015,
+        "cloud_cover": 48,
+        "wind_speed": 1.74,
+        "description": "scattered clouds"
+      },
+      {
+        "timestamp": "2026-02-05 00:00:00",
+        "temperature": 22.33,
+        "humidity": 39,
+        "pressure": 1015,
+        "cloud_cover": 41,
+        "wind_speed": 2,
+        "description": "scattered clouds"
+      },
+      {
+        "timestamp": "2026-02-05 03:00:00",
+        "temperature": 22.57,
+        "humidity": 43,
+        "pressure": 1017,
+        "cloud_cover": 16,
+        "wind_speed": 2.36,
+        "description": "few clouds"
+      },
+      {
+        "timestamp": "2026-02-05 06:00:00",
+        "temperature": 28.4,
+        "humidity": 33,
+        "pressure": 1018,
+        "cloud_cover": 0,
+        "wind_speed": 4.8,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 09:00:00",
+        "temperature": 30.2,
+        "humidity": 24,
+        "pressure": 1014,
+        "cloud_cover": 0,
+        "wind_speed": 2.73,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 12:00:00",
+        "temperature": 30.06,
+        "humidity": 23,
+        "pressure": 1014,
+        "cloud_cover": 0,
+        "wind_speed": 4.35,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-05 15:00:00",
+        "temperature": 25.58,
+        "humidity": 31,
+        "pressure": 1017,
+        "cloud_cover": 16,
+        "wind_speed": 0.92,
+        "description": "few clouds"
+      },
+      {
+        "timestamp": "2026-02-05 18:00:00",
+        "temperature": 24.09,
+        "humidity": 39,
+        "pressure": 1018,
+        "cloud_cover": 47,
+        "wind_speed": 1.89,
+        "description": "scattered clouds"
+      },
+      {
+        "timestamp": "2026-02-05 21:00:00",
+        "temperature": 21.37,
+        "humidity": 45,
+        "pressure": 1016,
+        "cloud_cover": 19,
+        "wind_speed": 0.85,
+        "description": "few clouds"
+      },
+      {
+        "timestamp": "2026-02-06 00:00:00",
+        "temperature": 20.66,
+        "humidity": 42,
+        "pressure": 1016,
+        "cloud_cover": 9,
+        "wind_speed": 1.54,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 03:00:00",
+        "temperature": 22.85,
+        "humidity": 35,
+        "pressure": 1018,
+        "cloud_cover": 0,
+        "wind_speed": 2.15,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 06:00:00",
+        "temperature": 29.14,
+        "humidity": 21,
+        "pressure": 1017,
+        "cloud_cover": 0,
+        "wind_speed": 4.25,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 09:00:00",
+        "temperature": 31.09,
+        "humidity": 17,
+        "pressure": 1014,
+        "cloud_cover": 0,
+        "wind_speed": 3.22,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 12:00:00",
+        "temperature": 30.3,
+        "humidity": 17,
+        "pressure": 1013,
+        "cloud_cover": 0,
+        "wind_speed": 3.3,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 15:00:00",
+        "temperature": 25.6,
+        "humidity": 23,
+        "pressure": 1016,
+        "cloud_cover": 0,
+        "wind_speed": 1.61,
+        "description": "clear sky"
+      },
+      {
+        "timestamp": "2026-02-06 18:00:00",
+        "temperature": 22.89,
+        "humidity": 28,
+        "pressure": 1016,
+        "cloud_cover": 0,
+        "wind_speed": 0.88,
+        "description": "clear sky"
+      }
+    ]
+  },
+  "current_18.463605257648183_73.83690591140855": {
+    "timestamp": "2026-02-05T01:03:55.538842",
+    "data": {
+      "temperature": 23,
+      "humidity": 35,
+      "pressure": 1015,
+      "cloud_cover": 56,
+      "wind_speed": 1.61,
+      "description": "broken clouds",
+      "timestamp": "2026-02-05T01:03:55.538297"
+    }
+  }
+}
