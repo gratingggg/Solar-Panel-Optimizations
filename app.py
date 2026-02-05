@@ -1,6 +1,3 @@
-"""
-Solar Energy Forecasting System - Enhanced Multi-Page Streamlit Application
-"""
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -11,7 +8,6 @@ from pathlib import Path
 import sys
 import joblib
 
-# Add src to path
 sys.path.append('src')
 
 from weather_api import WeatherAPIClient
@@ -20,7 +16,6 @@ from tilt_angle_estimator import TiltAngleEstimator
 from config import UI_CONFIG, MODEL_DIR
 from streamlit_js_eval import get_geolocation
 
-# Page configuration
 st.set_page_config(
     page_title=UI_CONFIG['page_title'],
     page_icon=UI_CONFIG['page_icon'],
@@ -28,7 +23,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+
 st.markdown("""
 <style>
     .main-header {
@@ -74,14 +69,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize session state
 if 'forecast_generated' not in st.session_state:
     st.session_state.forecast_generated = False
 
-# Load models and clients
 @st.cache_resource
 def load_resources():
-    """Load forecasting engine, weather client, and tilt estimator"""
     try:
         engine = ForecastingEngine()
         weather_client = WeatherAPIClient()
@@ -92,11 +84,10 @@ def load_resources():
 
 engine, weather_client, tilt_estimator, load_error = load_resources()
 
-# Sidebar Navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to",
-    ["🏠 Solar Forecasting", "📊 Model Comparison"],
+    ["Solar Forecasting", "Model Comparison"],
     label_visibility="collapsed"
 )
 
@@ -104,14 +95,10 @@ st.sidebar.divider()
 st.sidebar.caption("Solar Energy Forecasting System")
 st.sidebar.caption("Powered by Machine Learning")
 
-# ============================================================================
-# PAGE 1: SOLAR FORECASTING
-# ============================================================================
-if page == "🏠 Solar Forecasting":
+if page == "Solar Forecasting":
     st.markdown('<div class="main-header">Solar Energy Forecasting</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">AI-Powered 48-Hour Power Generation Predictions</div>', unsafe_allow_html=True)
     
-    # Check if model is loaded
     if load_error or engine is None or engine.model is None:
         st.error(f"""
         **Model Not Found**  
@@ -120,7 +107,7 @@ if page == "🏠 Solar Forecasting":
         """)
         st.stop()
     
-    # Input Section
+  
     st.header("System Configuration")
     
     col1, col2, col3 = st.columns(3)
@@ -140,11 +127,17 @@ if page == "🏠 Solar Forecasting":
         if loc_method == "Device GPS":
             loc = get_geolocation()
             if loc:
-                default_lat = loc['coords']['latitude']
-                default_lon = loc['coords']['longitude']
-                st.success(f"GPS Lock: {default_lat:.4f}, {default_lon:.4f}")
+                if 'coords' in loc:
+                    default_lat = loc['coords']['latitude']
+                    default_lon = loc['coords']['longitude']
+                    st.success(f"GPS Lock: {default_lat:.4f}, {default_lon:.4f}")
+                elif 'error' in loc:
+                    st.error(f"GPS Error: {loc['error'].get('message', 'Unknown error')}")
+                    st.info("Falling back to manual input.")
+                else:
+                    st.info("Waiting for GPS signal... Please allow location access in your browser.")
             else:
-                st.info("Waiting for GPS signal... Please allow location access in your browser.")
+                st.info("Searching for GPS... Ensure location is enabled on your device.")
         
         latitude = st.number_input("Latitude", -90.0, 90.0, float(default_lat), 0.0001, format="%.4f")
         longitude = st.number_input("Longitude", -180.0, 180.0, float(default_lon), 0.0001, format="%.4f")
@@ -174,8 +167,7 @@ if page == "🏠 Solar Forecasting":
     
     st.divider()
     
-    # Generate Forecast Button
-    if st.button("🚀 Generate 48-Hour Forecast", type="primary", use_container_width=True):
+    if st.button("Generate 48-Hour Forecast", type="primary", use_container_width=True):
         with st.spinner("Fetching weather data and generating forecast..."):
             try:
                 weather_forecast = weather_client.get_forecast(latitude, longitude, hours=48)
@@ -214,8 +206,7 @@ if page == "🏠 Solar Forecasting":
             except Exception as e:
                 st.error(f"Error generating forecast: {str(e)}")
                 st.stop()
-    
-    # Display Results
+
     if st.session_state.forecast_generated:
         forecast_df = st.session_state.forecast_df
         current_weather = st.session_state.current_weather
@@ -224,8 +215,7 @@ if page == "🏠 Solar Forecasting":
         weather_impact = st.session_state.weather_impact
         
         st.divider()
-        
-        # Current Weather
+
         st.header("Current Weather Conditions")
         col1, col2, col3, col4 = st.columns(4)
         col1.metric("Temperature", f"{current_weather['temperature']:.1f}°C")
@@ -238,7 +228,6 @@ if page == "🏠 Solar Forecasting":
         
         st.divider()
         
-        # Forecast Chart
         st.header("48-Hour Power Generation Forecast")
         
         fig = go.Figure()
@@ -262,7 +251,6 @@ if page == "🏠 Solar Forecasting":
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # Key Metrics
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Energy", f"{weather_impact['total_expected_energy_kwh']:.2f} kWh")
         col2.metric("Peak Power", f"{weather_impact['peak_power']:.1f} W")
@@ -270,7 +258,6 @@ if page == "🏠 Solar Forecasting":
         
         st.divider()
         
-        # Recommendations
         st.header("Optimization Recommendations")
         
         col1, col2 = st.columns(2)
@@ -302,7 +289,6 @@ if page == "🏠 Solar Forecasting":
         
         st.divider()
         
-        # Weather Impact
         st.header("Weather Impact Analysis")
         st.markdown(f"""
         <div class="metric-card">
@@ -313,7 +299,6 @@ if page == "🏠 Solar Forecasting":
         </div>
         """, unsafe_allow_html=True)
         
-        # Weather Trends
         fig2 = go.Figure()
         fig2.add_trace(go.Scatter(
             x=forecast_df['timestamp'], y=forecast_df['cloud_cover'],
@@ -333,14 +318,11 @@ if page == "🏠 Solar Forecasting":
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-# ============================================================================
-# PAGE 2: MODEL COMPARISON
-# ============================================================================
-elif page == "📊 Model Comparison":
+
+elif page == "Model Comparison":
     st.markdown('<div class="main-header">Model Performance Comparison</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Analysis of All 5 Trained Models</div>', unsafe_allow_html=True)
     
-    # Load model data
     model_path = MODEL_DIR / 'best_model.pkl'
     if not model_path.exists():
         st.error("No trained model found. Please train models first using the Jupyter Notebook.")
@@ -357,7 +339,6 @@ elif page == "📊 Model Comparison":
         st.error(f"Error loading model data: {e}")
         st.stop()
     
-    # Actual comparison data from Jupyter Notebook training
     comparison_data = pd.DataFrame({
         'Model': ['Random Forest', 'XGBoost', 'Linear Regression', 'LSTM', 'Prophet'],
         'MAE': [11.93, 12.70, 17.29, 71.32, 135.30],
@@ -366,7 +347,6 @@ elif page == "📊 Model Comparison":
         'Training_Time_min': [4.5, 3.2, 0.5, 12.8, 6.4]
     })
     
-    # Metrics Overview
     st.header("Performance Metrics")
     
     col1, col2, col3 = st.columns(3)
@@ -393,8 +373,7 @@ elif page == "📊 Model Comparison":
         st.plotly_chart(fig_r2, use_container_width=True)
     
     st.divider()
-    
-    # Detailed Comparison Table
+
     st.header("Detailed Metrics Table")
     
     styled_df = comparison_data.style.background_gradient(
@@ -412,7 +391,6 @@ elif page == "📊 Model Comparison":
     
     st.divider()
     
-    # Training Time vs Accuracy
     st.header("Training Time vs Accuracy Trade-off")
     
     fig_scatter = px.scatter(comparison_data, x='Training_Time_min', y='R2',
@@ -424,7 +402,7 @@ elif page == "📊 Model Comparison":
     
     st.divider()
     
-    # Model Characteristics
+
     st.header("Model Characteristics")
     
     model_info = {

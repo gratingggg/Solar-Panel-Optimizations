@@ -1,10 +1,7 @@
-"""
-Configuration file for Solar Energy Forecasting System
-"""
+
 import os
 from pathlib import Path
 
-# Load environment variables manually (no dependency on python-dotenv)
 def load_env_file():
     """Load .env file manually"""
     env_path = Path(__file__).parent.parent / '.env'
@@ -18,26 +15,21 @@ def load_env_file():
 
 load_env_file()
 
-# Project paths
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "Dataset"
 MODEL_DIR = BASE_DIR / "models"
 CACHE_DIR = BASE_DIR / "cache"
 NOTEBOOK_DIR = BASE_DIR / "notebooks"
 
-# Ensure directories exist
 MODEL_DIR.mkdir(exist_ok=True)
 CACHE_DIR.mkdir(exist_ok=True)
 
-# API Configuration
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 OPENWEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5"
 
-# API Rate Limiting
-API_RATE_LIMIT = 60  # calls per minute
+API_RATE_LIMIT = 60 
 CACHE_EXPIRY_MINUTES = 30
 
-# Model Configuration - Optimized for 32GB RAM and GPU
 MODEL_CONFIG = {
     "random_forest": {
         "n_estimators": 200,  # Increased from 100
@@ -71,7 +63,6 @@ MODEL_CONFIG = {
     }
 }
 
-# Data Processing Configuration
 DATA_CONFIG = {
     "train_ratio": 0.70,
     "val_ratio": 0.15,
@@ -80,14 +71,12 @@ DATA_CONFIG = {
     "max_missing_ratio": 0.1  # Max 10% missing values allowed
 }
 
-# Feature Engineering
 FEATURE_CONFIG = {
     "lag_hours": [1, 3, 6, 24],
     "rolling_windows": [3, 6, 24],
     "time_features": ["hour", "day", "month", "season", "is_weekend"]
 }
 
-# Computer Vision Configuration
 CV_CONFIG = {
     "canny_threshold1": 50,
     "canny_threshold2": 150,
@@ -96,14 +85,12 @@ CV_CONFIG = {
     "default_angle_latitude_based": True
 }
 
-# Forecast Configuration
 FORECAST_CONFIG = {
     "forecast_hours": 48,
     "confidence_level": 0.95,
     "clear_sky_efficiency_threshold": 0.85
 }
 
-# Streamlit UI Configuration
 UI_CONFIG = {
     "page_title": "Solar Energy Forecasting System",
     "page_icon": "☀️",

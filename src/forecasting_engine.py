@@ -1,7 +1,4 @@
-"""
-Forecasting Engine Module
-Generates forecasts and optimization recommendations
-"""
+
 import numpy as np
 import pandas as pd
 import joblib
@@ -15,15 +12,9 @@ from config import MODEL_DIR, FORECAST_CONFIG
 
 
 class ForecastingEngine:
-    """Generate solar power forecasts and recommendations"""
     
     def __init__(self, model_path: Optional[str] = None):
-        """
-        Initialize forecasting engine
         
-        Args:
-            model_path: Path to trained model file (default: best_model.pkl)
-        """
         if model_path is None:
             model_path = MODEL_DIR / "best_model.pkl"
         
@@ -37,7 +28,6 @@ class ForecastingEngine:
             print(f"Warning: Model file not found at {model_path}")
     
     def load_model(self, model_path: str):
-        """Load trained model and scaler"""
         try:
             model_data = joblib.load(model_path)
             self.model = model_data['model']
@@ -53,31 +43,18 @@ class ForecastingEngine:
         panel_specs: Dict,
         hours: int = 48
     ) -> pd.DataFrame:
-        """
-        Generate power forecast for next N hours
         
-        Args:
-            weather_forecast: List of weather forecast dictionaries
-            panel_specs: Panel specifications (capacity, tilt, etc.)
-            hours: Number of hours to forecast
-            
-        Returns:
-            DataFrame with forecast
-        """
         if self.model is None:
             raise ValueError("No model loaded. Cannot generate forecast.")
         
-        # Prepare forecast features
         forecast_df = self._prepare_forecast_features(weather_forecast, panel_specs)
         
-        # Generate predictions
         if self.scaler:
             X_scaled = self.scaler.transform(forecast_df[self.feature_names])
             predictions = self.model.predict(X_scaled)
         else:
             predictions = self.model.predict(forecast_df[self.feature_names])
         
-        # Create forecast dataframe
         forecast_result = pd.DataFrame({
             'timestamp': forecast_df['timestamp'],
             'predicted_power': np.maximum(predictions, 0),  # Ensure non-negative
@@ -86,7 +63,6 @@ class ForecastingEngine:
             'irradiation_estimate': forecast_df['irradiation_estimate']
         })
         
-        # Add confidence intervals
         forecast_result = self._add_confidence_intervals(forecast_result, predictions)
         
         return forecast_result
@@ -96,23 +72,19 @@ class ForecastingEngine:
         weather_forecast: List[Dict],
         panel_specs: Dict
     ) -> pd.DataFrame:
-        """Prepare features from weather forecast"""
         
         forecast_data = []
         for weather in weather_forecast:
             timestamp = pd.to_datetime(weather['timestamp'])
             
-            # Estimate irradiation from cloud cover (simplified model)
             cloud_cover = weather['cloud_cover']
             hour = timestamp.hour
             
-            # Clear sky irradiation (simplified)
             if 6 <= hour <= 18:
                 clear_sky_irr = 0.8 * np.sin((hour - 6) * np.pi / 12)
             else:
                 clear_sky_irr = 0.0
             
-            # Adjust for cloud cover
             irradiation = clear_sky_irr * (1 - cloud_cover / 100)
             
             features = {
@@ -137,9 +109,8 @@ class ForecastingEngine:
         
         df = pd.DataFrame(forecast_data)
         
-        # Add lag and rolling features (use last known values or estimates)
         for lag in [1, 3, 6, 24]:
-            df[f'AC_POWER_lag_{lag}h'] = 0  # Will be updated with recent data
+            df[f'AC_POWER_lag_{lag}h'] = 0  
         
         for window in [3, 6, 24]:
             df[f'IRRADIATION_rolling_mean_{window}h'] = df['IRRADIATION'].rolling(window, min_periods=1).mean()
@@ -153,11 +124,8 @@ class ForecastingEngine:
         forecast_df: pd.DataFrame, 
         predictions: np.ndarray
     ) -> pd.DataFrame:
-        """Add confidence intervals to forecast"""
         
-        # Simple confidence interval based on prediction uncertainty
-        # In production, use quantile regression or bootstrap
-        std_error = np.std(predictions) * 0.2  # Simplified
+        std_error = np.std(predictions) * 0.2  
         
         forecast_df['lower_bound'] = np.maximum(
             forecast_df['predicted_power'] - 1.96 * std_error, 0
@@ -172,18 +140,7 @@ class ForecastingEngine:
         latitude: float,
         season: int
     ) -> Dict:
-        """
-        Recommend optimal tilt angle adjustment
         
-        Args:
-            current_tilt: Current tilt angle in degrees
-            latitude: Geographic latitude
-            season: Season (1=Winter, 2=Spring, 3=Summer, 4=Fall)
-            
-        Returns:
-            Dictionary with recommendation
-        """
-        # Optimal tilt varies by season
         seasonal_adjustment = {
             1: 15,   # Winter: steeper angle
             2: 0,    # Spring: near latitude
@@ -196,7 +153,6 @@ class ForecastingEngine:
         
         adjustment = optimal_tilt - current_tilt
         
-        # Calculate expected improvement
         if abs(adjustment) < 5:
             improvement = "minimal"
             recommendation = f"Current tilt angle ({current_tilt:.1f}°) is near optimal."
@@ -221,25 +177,13 @@ class ForecastingEngine:
         forecast_df: pd.DataFrame,
         panel_specs: Dict
     ) -> Dict:
-        """
-        Detect potential maintenance needs
         
-        Args:
-            forecast_df: Forecast dataframe
-            panel_specs: Panel specifications
-            
-        Returns:
-            Dictionary with maintenance alerts
-        """
         alerts = []
         
-        # Calculate expected clear-sky performance
         rated_capacity = panel_specs.get('rated_capacity', 300)
         
-        # Check for efficiency drops
         avg_predicted = forecast_df['predicted_power'].mean()
         
-        # During daylight hours (simplified)
         daylight_forecast = forecast_df[
             (forecast_df['timestamp'].dt.hour >= 8) & 
             (forecast_df['timestamp'].dt.hour <= 16)
@@ -256,9 +200,8 @@ class ForecastingEngine:
                     'severity': 'medium'
                 })
         
-        # Check for unusual patterns
         power_std = forecast_df['predicted_power'].std()
-        if power_std < 10:  # Very low variance
+        if power_std < 10:  
             alerts.append({
                 'type': 'pattern_anomaly',
                 'message': "Unusual power generation pattern detected. Verify system operation.",
@@ -281,16 +224,7 @@ class ForecastingEngine:
         self, 
         forecast_df: pd.DataFrame
     ) -> Dict:
-        """
-        Analyze weather impact on generation
         
-        Args:
-            forecast_df: Forecast dataframe
-            
-        Returns:
-            Dictionary with weather impact analysis
-        """
-        # Calculate impact of cloud cover
         avg_cloud_cover = forecast_df['cloud_cover'].mean()
         
         if avg_cloud_cover < 20:
@@ -306,14 +240,11 @@ class ForecastingEngine:
             weather_condition = "Poor"
             impact = "Significant reduction (40-60%) due to heavy cloud cover."
         
-        # Find peak generation time
         peak_idx = forecast_df['predicted_power'].idxmax()
         peak_time = forecast_df.loc[peak_idx, 'timestamp']
         peak_power = forecast_df.loc[peak_idx, 'predicted_power']
         
-        # Calculate total expected energy
-        total_energy = forecast_df['predicted_power'].sum() / 1000  # kWh (assuming hourly data)
-        
+        total_energy = forecast_df['predicted_power'].sum() / 1000  
         return {
             'weather_condition': weather_condition,
             'avg_cloud_cover': avg_cloud_cover,

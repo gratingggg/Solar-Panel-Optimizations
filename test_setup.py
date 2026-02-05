@@ -1,6 +1,4 @@
-"""
-Quick test script to verify system setup
-"""
+
 import sys
 sys.path.append('src')
 
@@ -8,7 +6,6 @@ print("="*60)
 print("SOLAR FORECASTING SYSTEM - SETUP VERIFICATION")
 print("="*60)
 
-# Test imports
 print("\n1. Testing imports...")
 try:
     import pandas as pd
@@ -21,7 +18,6 @@ except ImportError as e:
     print(f"   ✗ Import error: {e}")
     sys.exit(1)
 
-# Test custom modules
 print("\n2. Testing custom modules...")
 try:
     from config import DATA_DIR, MODEL_DIR
@@ -34,7 +30,6 @@ except ImportError as e:
     print(f"   ✗ Module import error: {e}")
     sys.exit(1)
 
-# Test data directory
 print("\n3. Checking data directory...")
 if DATA_DIR.exists():
     files = list(DATA_DIR.glob("*.csv"))
@@ -42,7 +37,7 @@ if DATA_DIR.exists():
 else:
     print(f"   ✗ Data directory not found: {DATA_DIR}")
 
-# Test API client
+
 print("\n4. Testing Weather API client...")
 try:
     client = WeatherAPIClient()
@@ -53,7 +48,6 @@ try:
 except Exception as e:
     print(f"   ✗ API client error: {e}")
 
-# Test preprocessing
 print("\n5. Testing data preprocessing...")
 try:
     preprocessor = SolarDataPreprocessor()
